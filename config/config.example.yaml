@@ -1,0 +1,10 @@
+#
+# Пример конфигурации для настройки сервиса
+#
+http:
+  listen: 0.0.0.0:8080
+sources:
+  binance: stream.binance.com:9443
+symbols:
+  - BTCUSDT
+  - ETHUSDT

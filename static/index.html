@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>WebSocket Client</h1>
+<textarea id="messages" readonly></textarea>
+<script>
+    const ws = new WebSocket('ws://localhost:8080/ws/bids');
+    const messagesTextarea = document.getElementById('messages');
+
+    ws.onopen = () => {
+        messagesTextarea.value += 'Connected \n';
+        messagesTextarea.scrollTop = messagesTextarea.scrollHeight;
+    };
+
+    ws.onmessage = (event) => {
+        messagesTextarea.value += event.data + '\n';
+        messagesTextarea.scrollTop = messagesTextarea.scrollHeight;
+    };
+
+    ws.onclose = (e) => {
+        console.log(e);
+        messagesTextarea.value += 'Connection closed\n';
+        messagesTextarea.scrollTop = messagesTextarea.scrollHeight;
+    };
+</script>
+</body>
+</html>
